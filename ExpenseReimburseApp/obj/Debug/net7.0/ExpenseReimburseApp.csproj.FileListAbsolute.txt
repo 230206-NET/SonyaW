@@ -1,0 +1,16 @@
+C:\Users\Sonya\Revature\230206-NET\Exercises\ExpenseReimburseApp\obj\Debug\net7.0\ExpenseReimburseApp.csproj.AssemblyReference.cache
+C:\Users\Sonya\Revature\230206-NET\Exercises\ExpenseReimburseApp\obj\Debug\net7.0\ExpenseReimburseApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Sonya\Revature\230206-NET\Exercises\ExpenseReimburseApp\obj\Debug\net7.0\ExpenseReimburseApp.csproj.CoreCompileInputs.cache
+C:\Users\Sonya\Revature\230206-NET\Exercises\ExpenseReimburseApp\bin\Debug\net7.0\ExpenseReimburseApp.exe
+C:\Users\Sonya\Revature\230206-NET\Exercises\ExpenseReimburseApp\bin\Debug\net7.0\ExpenseReimburseApp.deps.json
+C:\Users\Sonya\Revature\230206-NET\Exercises\ExpenseReimburseApp\bin\Debug\net7.0\ExpenseReimburseApp.runtimeconfig.json
+C:\Users\Sonya\Revature\230206-NET\Exercises\ExpenseReimburseApp\bin\Debug\net7.0\ExpenseReimburseApp.dll
+C:\Users\Sonya\Revature\230206-NET\Exercises\ExpenseReimburseApp\bin\Debug\net7.0\ExpenseReimburseApp.pdb
+C:\Users\Sonya\Revature\230206-NET\Exercises\ExpenseReimburseApp\bin\Debug\net7.0\Models.dll
+C:\Users\Sonya\Revature\230206-NET\Exercises\ExpenseReimburseApp\bin\Debug\net7.0\Models.pdb
+C:\Users\Sonya\Revature\230206-NET\Exercises\ExpenseReimburseApp\obj\Debug\net7.0\ExpenseReimburseApp.csproj.CopyComplete
+C:\Users\Sonya\Revature\230206-NET\Exercises\ExpenseReimburseApp\obj\Debug\net7.0\ExpenseReimburseApp.dll
+C:\Users\Sonya\Revature\230206-NET\Exercises\ExpenseReimburseApp\obj\Debug\net7.0\refint\ExpenseReimburseApp.dll
+C:\Users\Sonya\Revature\230206-NET\Exercises\ExpenseReimburseApp\obj\Debug\net7.0\ExpenseReimburseApp.pdb
+C:\Users\Sonya\Revature\230206-NET\Exercises\ExpenseReimburseApp\obj\Debug\net7.0\ExpenseReimburseApp.genruntimeconfig.cache
+C:\Users\Sonya\Revature\230206-NET\Exercises\ExpenseReimburseApp\obj\Debug\net7.0\ref\ExpenseReimburseApp.dll
