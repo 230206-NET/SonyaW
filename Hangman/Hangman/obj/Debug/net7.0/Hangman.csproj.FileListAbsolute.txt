@@ -1,0 +1,12 @@
+C:\Users\Sonya\Revature\230206-NET\Exercises\Hangman\Hangman\obj\Debug\net7.0\Hangman.csproj.AssemblyReference.cache
+C:\Users\Sonya\Revature\230206-NET\Exercises\Hangman\Hangman\obj\Debug\net7.0\Hangman.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Sonya\Revature\230206-NET\Exercises\Hangman\Hangman\obj\Debug\net7.0\Hangman.AssemblyInfoInputs.cache
+C:\Users\Sonya\Revature\230206-NET\Exercises\Hangman\Hangman\obj\Debug\net7.0\Hangman.AssemblyInfo.cs
+C:\Users\Sonya\Revature\230206-NET\Exercises\Hangman\Hangman\obj\Debug\net7.0\Hangman.csproj.CoreCompileInputs.cache
+C:\Users\Sonya\Revature\230206-NET\Exercises\Hangman\Hangman\bin\Debug\net7.0\Hangman.deps.json
+C:\Users\Sonya\Revature\230206-NET\Exercises\Hangman\Hangman\bin\Debug\net7.0\Hangman.dll
+C:\Users\Sonya\Revature\230206-NET\Exercises\Hangman\Hangman\bin\Debug\net7.0\Hangman.pdb
+C:\Users\Sonya\Revature\230206-NET\Exercises\Hangman\Hangman\obj\Debug\net7.0\Hangman.dll
+C:\Users\Sonya\Revature\230206-NET\Exercises\Hangman\Hangman\obj\Debug\net7.0\refint\Hangman.dll
+C:\Users\Sonya\Revature\230206-NET\Exercises\Hangman\Hangman\obj\Debug\net7.0\Hangman.pdb
+C:\Users\Sonya\Revature\230206-NET\Exercises\Hangman\Hangman\obj\Debug\net7.0\ref\Hangman.dll
