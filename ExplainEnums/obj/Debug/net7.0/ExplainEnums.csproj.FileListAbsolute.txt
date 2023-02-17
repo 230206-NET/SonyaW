@@ -1,0 +1,15 @@
+C:\Users\Sonya\Revature\230206-NET\Exercises\ExplainEnums\obj\Debug\net7.0\ExplainEnums.csproj.AssemblyReference.cache
+C:\Users\Sonya\Revature\230206-NET\Exercises\ExplainEnums\obj\Debug\net7.0\ExplainEnums.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Sonya\Revature\230206-NET\Exercises\ExplainEnums\obj\Debug\net7.0\ExplainEnums.AssemblyInfoInputs.cache
+C:\Users\Sonya\Revature\230206-NET\Exercises\ExplainEnums\obj\Debug\net7.0\ExplainEnums.AssemblyInfo.cs
+C:\Users\Sonya\Revature\230206-NET\Exercises\ExplainEnums\obj\Debug\net7.0\ExplainEnums.csproj.CoreCompileInputs.cache
+C:\Users\Sonya\Revature\230206-NET\Exercises\ExplainEnums\bin\Debug\net7.0\ExplainEnums.exe
+C:\Users\Sonya\Revature\230206-NET\Exercises\ExplainEnums\bin\Debug\net7.0\ExplainEnums.deps.json
+C:\Users\Sonya\Revature\230206-NET\Exercises\ExplainEnums\bin\Debug\net7.0\ExplainEnums.runtimeconfig.json
+C:\Users\Sonya\Revature\230206-NET\Exercises\ExplainEnums\bin\Debug\net7.0\ExplainEnums.dll
+C:\Users\Sonya\Revature\230206-NET\Exercises\ExplainEnums\bin\Debug\net7.0\ExplainEnums.pdb
+C:\Users\Sonya\Revature\230206-NET\Exercises\ExplainEnums\obj\Debug\net7.0\ExplainEnums.dll
+C:\Users\Sonya\Revature\230206-NET\Exercises\ExplainEnums\obj\Debug\net7.0\refint\ExplainEnums.dll
+C:\Users\Sonya\Revature\230206-NET\Exercises\ExplainEnums\obj\Debug\net7.0\ExplainEnums.pdb
+C:\Users\Sonya\Revature\230206-NET\Exercises\ExplainEnums\obj\Debug\net7.0\ExplainEnums.genruntimeconfig.cache
+C:\Users\Sonya\Revature\230206-NET\Exercises\ExplainEnums\obj\Debug\net7.0\ref\ExplainEnums.dll
