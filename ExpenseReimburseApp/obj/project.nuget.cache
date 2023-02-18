@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "me4QSM/VqrRkzyS23atAGTpH7PPRrEHMQavoxIF0Hoc3wkUjCLUQVzUbofESE+p7eju9G4q4n7zibZzWNgyDdg==",
+  "dgSpecHash": "W8h9VlELv8mQNlW6YVDl2Wx+HuVMT+fbvBBOtiD8gEskUq4d/P8803GwI2XMilc4lZRaCzGlcY0d0dTkHI/gJQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseApp\\ExpenseReimburseApp.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Sonya\\.nuget\\packages\\serilog\\2.12.0\\serilog.2.12.0.nupkg.sha512",
+    "C:\\Users\\Sonya\\.nuget\\packages\\serilog.sinks.console\\4.1.0\\serilog.sinks.console.4.1.0.nupkg.sha512",
+    "C:\\Users\\Sonya\\.nuget\\packages\\serilog.sinks.file\\5.0.0\\serilog.sinks.file.5.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

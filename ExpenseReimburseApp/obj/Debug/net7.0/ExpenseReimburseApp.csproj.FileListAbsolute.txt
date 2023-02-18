@@ -14,3 +14,6 @@ C:\Users\Sonya\Revature\230206-NET\Exercises\ExpenseReimburseApp\obj\Debug\net7.
 C:\Users\Sonya\Revature\230206-NET\Exercises\ExpenseReimburseApp\obj\Debug\net7.0\ExpenseReimburseApp.pdb
 C:\Users\Sonya\Revature\230206-NET\Exercises\ExpenseReimburseApp\obj\Debug\net7.0\ExpenseReimburseApp.genruntimeconfig.cache
 C:\Users\Sonya\Revature\230206-NET\Exercises\ExpenseReimburseApp\obj\Debug\net7.0\ref\ExpenseReimburseApp.dll
+C:\Users\Sonya\Revature\230206-NET\Exercises\ExpenseReimburseApp\bin\Debug\net7.0\Serilog.dll
+C:\Users\Sonya\Revature\230206-NET\Exercises\ExpenseReimburseApp\bin\Debug\net7.0\Serilog.Sinks.Console.dll
+C:\Users\Sonya\Revature\230206-NET\Exercises\ExpenseReimburseApp\bin\Debug\net7.0\Serilog.Sinks.File.dll
