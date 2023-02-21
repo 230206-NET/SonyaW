@@ -6,30 +6,55 @@ using System.Threading;
 
 using Models;
 
+/*
+TO-DO:
+  - create login function (putting credentials against DB)
+
+*/
+
 public class MainMenu {
 
     public static void Main(string[] args) {
 
-    /* MVPs
-        Allow use to sign in/create account
-        Allow employees to submit a ticket
-        Allow Managers to Accet/Reject a ticket
-    */
         MainMenu start = new MainMenu();
-
-        Console.WriteLine("Initiating testers...");
-        List<Expense> testExpense = new List<Expense>() {
-            new Expense(100, "stuff"), new Expense(150, "things"), new Expense(200, "airfare")
-        };
-        Employee tester = new Employee("sonya wong", "qienvpiq2nv", "sona@gmail.com", "juniper song", testExpense);
-        
-        // tester.ToString();
-
-        // EditProfile(tester);
-
-        // tester.ToString();
-
         start.Start();
+
+//*
+        // Console.WriteLine("Initiating testers...");
+        // List<Expense> testExpense1 = new List<Expense>() {
+        //     new Expense(100, "stuff"), new Expense(150, "things"), new Expense(200, "airfare")
+        // };
+        //  List<Expense> testExpense2 = new List<Expense>() {
+        //     new Expense(100, "stuff"), new Expense(150, "things"), new Expense(200, "airfare")
+        // };
+        //  List<Expense> testExpense3 = new List<Expense>() {
+        //     new Expense(100, "stuff"), new Expense(150, "things"), new Expense(200, "airfare")
+        // };
+        //  List<Expense> testExpense4 = new List<Expense>() {
+        //     new Expense(100, "stuff"), new Expense(150, "things"), new Expense(200, "airfare")
+        // };
+        //  List<Expense> testExpense5 = new List<Expense>() {
+        //     new Expense(100, "stuff"), new Expense(150, "things"), new Expense(200, "airfare")
+        // };
+        // Employee tester1 = new Employee("sonya wong", "qienvpiq2nv", "sona@gmail.com", "juniper song", testExpense1);
+        // Employee tester2 = new Employee("different wong", "qienvpiq2nv", "sona@gmail.com", "juniper song", testExpense2);
+        // Employee tester3 = new Employee("bob wong", "qienvpiq2nv", "sona@gmail.com", "juniper song", testExpense3);
+        // Employee tester4 = new Employee("joe wong", "qienvpiq2nv", "sona@gmail.com", "juniper song", testExpense4);
+        // Employee tester5 = new Employee("john wong", "qienvpiq2nv", "sona@gmail.com", "juniper song", testExpense5);
+
+        // List<Employee> mngEmpl = new List<Employee>() {tester1, tester2, tester3, tester4, tester5};
+        // Manager newMang = new Manager("John Doe", "helloworld", "email@email.com", mngEmpl);
+        
+        // newMang.AcceptEmployeeTicket(newMang.GetEmployee(1).GetExpense(1)); // PASS IN AN EXPENSE OBJECT
+        // newMang.RejectEmployeeTicket(newMang.GetEmployee(1).GetExpense(2)); // PASS IN AN EXPENSE OBJECT
+        // Console.WriteLine("{0}", newMang.GetEmployee(1).GetExpense(1));
+        // newMang.DisplayAllEmployees();
+        // tester.ToString();
+        // tester.displayTickets();
+//*/
+        
+        // RunManager(newMang);
+
     }
 
     private void Start() {
@@ -66,14 +91,17 @@ public class MainMenu {
         string res = Console.ReadLine();
         return res;
     }
+  
     public static bool promptExit() {
         Console.WriteLine("Are you sure you want to cancel?");
         return (Console.ReadLine().ToLower() == "yes") ? true : false;
     }
+ 
     private static bool LogIn(){
         Console.WriteLine("Signing in...\n     Enter email:");
         return true;
     }
+  
     private static Employee CreateAcct() {      // RETURNS TRUE IF ABLE TO CREATE AN ACCOUNT
         Console.WriteLine("\nSetting up new account...");
         Thread.Sleep(1000);
@@ -163,7 +191,7 @@ public class MainMenu {
 
         return newEmp;
     }
-
+  
     public static string ValidateAndReturnName (string tempInputName) {
         string namePattern = @"\w+ \w+";
         Match nameMatch = Regex.Match(tempInputName, namePattern);
@@ -177,13 +205,14 @@ public class MainMenu {
         }
         return "";
     }
-
+ 
     public static string ValidateAndReturnEmail(string tempString){
         string pattern = @"(\w{3,10})@\w+\.(\w{3})";
         Match m = Regex.Match(tempString, pattern);
         if(m.Value != "") return m.Value;
         return "";
     }
+  
     private static int RunEmployee(Employee empl) {
         while(true) {
              Console.WriteLine(@"
@@ -222,13 +251,148 @@ What action would you like to take?
         }
         return -1;
     }
-
-    public static int RunManager(Employee manager) {
+ 
+    public static int RunManager(Manager manager) {
         // view list of Employees
+        Thread.Sleep(2000);
+        while(true) {
+            manager.DisplayAllEmployees();
+            Thread.Sleep(1000);
+            Console.WriteLine(@"
+   What would you like to do?
+      [1]: View an employee's information
+      [2]: Remove an employee
+      [X}: Exit
+    ");
+            string action = Console.ReadLine().ToUpper();
+            switch (action) {
+                case "1":
+                    Console.Write("     Enter the row of the employee you would like to view: ");
+                    int emplRow = 0;
+                    bool validEmplRow = int.TryParse(Console.ReadLine(), out emplRow);
+                    Console.WriteLine();
+                    if(validEmplRow) {
+                        Employee viewingEmpl = manager.GetEmployee(emplRow-1);
+                        if(viewingEmpl != null) {
+                            Console.WriteLine(@"
+       Viewing {0}'s tickets
+    ---------------------------------------", viewingEmpl.name);
+                            viewingEmpl.displayTickets();
+                            Console.WriteLine(@"
+    Actions:
+        [1]: Accept a ticket
+        [2]: Reject a ticket
+        [X]: Return to previous menu
+        ");
+                            string menu2Action = Console.ReadLine().ToUpper();
+                            switch (menu2Action) {
+                                case "1":
+                                    Console.Write("   Enter row of ticket you would like to accept: ");
+                                    int acceptTicketRow = 0;
+                                    bool acceptParseRow = int.TryParse(Console.ReadLine(), out acceptTicketRow);
+                                    if(acceptParseRow) {
+                                        if(manager.AcceptEmployeeTicket(viewingEmpl, acceptTicketRow - 1)) {
+                                            Thread.Sleep(1000);
+                                            viewingEmpl.displayTickets();
+                                            Thread.Sleep(1000);
+                                            Console.WriteLine(@"
+          *************************
+              Update successful
+          *************************
+          ");
+                                            Thread.Sleep(1000);
+                                        } else {
+                                            Console.WriteLine("     !! Update was unsuccessful due to invalid row number");
+                                            Thread.Sleep(2000);
+                                            Console.WriteLine("   Returning to main menu...");
+                                            Thread.Sleep(1500);
+                                        }
+                                    } else {
+                                        Thread.Sleep(500);
+                                        Console.WriteLine(" !! Valid row number was not inputted");
+                                        Thread.Sleep(2000);
+                                        Console.WriteLine("   Returning to main menu...");
+                                        Thread.Sleep(1500);
+                                    }
+                                break;
+                                case "2":
+                                    Console.Write("   Please enter row of ticket you would like to reject: ");
+                                    int rejectTicketRow = 0;
+                                    bool rejectParseRow = int.TryParse(Console.ReadLine(), out rejectTicketRow);
+                                    if(rejectParseRow) {
+                                        if(manager.RejectEmployeeTicket(viewingEmpl, rejectTicketRow - 1)) {
+                                            Thread.Sleep(1000);
+                                            viewingEmpl.displayTickets();
+                                            Thread.Sleep(1000);
+                                            Console.WriteLine(@"
+        ************************
+            Update successful
+        ************************
+        ");
+                                            Thread.Sleep(1000);
+                                        } else {
+                                            Console.WriteLine("   !! Update was unsuccessful due to invalid row number.");
+                                            Thread.Sleep(2000);
+                                            Console.WriteLine("   Returning to main menu...");
+                                            Thread.Sleep(1500);
+                                        }
+                                    } else {
+                                        Thread.Sleep(500);
+                                        Console.WriteLine(" !! Valid row number was not inputted");
+                                        Thread.Sleep(2000);
+                                        Console.WriteLine("   Returning to main menu...");
+                                        Thread.Sleep(1500);
+                                    }
+                                break;
+                                case "X":
+                                    Console.WriteLine("   Returning to main menu");
+                                break;
+                                default:
+                                    Console.WriteLine("!! Unrecognized response. Returning to main menu...");
+                                    Thread.Sleep(500);
+                                break;
+                            }
+                        } else {
+                            Thread.Sleep(500);
+                            Console.WriteLine("   !! Row number is out of range. Please enter a valid row number displayed on the left of the table.");
+                            Thread.Sleep(500);
+                        }
+                    } else {
+                        Thread.Sleep(500);
+                        Console.WriteLine(" !! Valid row number was not inputted");
+                        Thread.Sleep(2000);
+                        Console.WriteLine("   Returning to main menu...");
+                        Thread.Sleep(1500);
+                    }
+                break;
+                case "2":
+                    Console.Write("   Enter the row number of the employee you would like to remove: ");
+                    int removeRow = 0;
+                    bool validRemoveRow = int.TryParse(Console.ReadLine(), out removeRow);
+                    if(validRemoveRow && manager.RemoveEmployee(removeRow-1)) {
+                        Console.WriteLine(@"
+    ***********************************
+        Employee removal successful
+    ***********************************
+    ");
+                    }
+                    else {
+                        Console.WriteLine("     !! Removal was unsuccessful due to invalid row !!\n");
+                        Thread.Sleep(1500);
+                    }
+                break;
+                case "X":
+                    return -1;
+                break;
+                default:
+                    Console.WriteLine("   !! Unrecognized response. Please try again");
+                break;
+            }  
+        }
         // accept/reject tickets
         return -1;
     }
-
+ 
     public static bool CreateTicket(Employee empl) {
         // prompt for value
         Console.Write("   What do you want to get reimbursed for?\n      ");
@@ -244,8 +408,8 @@ What action would you like to take?
         }
         Console.WriteLine("   Entering ticket reimbursement of ${0} for {1}...", tempReimburseVal, ticketDescription);
         Thread.Sleep(2000);
-        Console.WriteLine("   Ticket has been submitted. Awaiting response from manager.");
         empl.createTicket(tempReimburseVal, ticketDescription);
+        Console.WriteLine("   Ticket has been submitted. Awaiting response from manager.");
         // prompt for description
         return true;
     }

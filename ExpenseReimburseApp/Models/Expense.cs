@@ -3,22 +3,22 @@ public class Expense
 {
     enum ticketStatuses { Pending = 0, Rejected = -1, Accepted = 1 }
 
-    public int value { get; set; } = 0;
+    public int amount { get; set; } = 0;
     public string description { get; set; } = "";
     public int ticketStatus { get; set; } = 0;
 
     public Expense(int value) {
-        this.value = value;
+        this.amount = value;
     }
 
     public Expense(int value, string description) {
-        this.value = value;
+        this.amount = value;
         this.description = description;
     }
 
     public void ToString() {
         string ticketAcceptedString = (ticketStatus == (int)ticketStatuses.Accepted) ? "Accepted" : (ticketStatus == (int)ticketStatuses.Rejected) ? "Rejected" : "Pending" ;
-        Console.WriteLine($"{value, 7} | {ticketAcceptedString, 16} | {description}");
+        Console.WriteLine($"{amount, -7} | {ticketAcceptedString, -16} | {description}");
     }
 
     public void AcceptTicket() {
@@ -34,7 +34,7 @@ public class Expense
     }
 
     public void EditTicket(int value, string description) {
-        this.value = value;
+        this.amount = value;
         this.description = description;
     }
 

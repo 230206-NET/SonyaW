@@ -1,14 +1,17 @@
 ﻿namespace Models;
 using System.Collections.Generic;
+using System.Threading;
 
 public class Employee
 {
-    public string name { get; set; } = "";
-    public string userPW { get; set; } = "";
-    public string email { get; set; } = "";
-    public string manager { get; set; } = "";
+    public string name { get; set; } = "Unknown";
+    public string userPW { get; set; } = "No security";
+    public string email { get; set; } = "Unknown";
+    public string manager { get; set; } = "Unknown";
     // public bool promote { get; set; } = false;
     public List<Expense> ? ListOfExpenses = new List<Expense>();
+
+    public Employee(){}
 
     public Employee(string nameIn, string userPwIn, string emailIn, string managerIn) {
         name = nameIn;
@@ -45,15 +48,38 @@ public class Employee
 
     public void displayTickets() {
         Console.WriteLine(@"
-  Price |   Ticket Status  | Description
--------------------------------------------");
+ Row  |  Price |   Ticket Status  | Description
+---------------------------------------------------");
+        int i = 1;
         foreach(Expense ticket in ListOfExpenses) {
+            Console.Write("  {0}   |", i);
             ticket.ToString();
+            i++;
+            Thread.Sleep(100);
         }
     }
 
     public void deleteTicket(int input) {
         ListOfExpenses.RemoveAt(input - 1);
+    }
+
+    // public bool AcceptTicket(Expense expenseToAccept) {
+    //     if(ListOfExpenses.Contains(expenseToAccept)) {
+    //         expenseToAccept.AcceptTicket();
+    //         return true;
+    //     } return false;
+    // }
+
+    // public bool RejectTicket(Expense expenseToAccept) {
+    //     if(ListOfExpenses.Contains(expenseToAccept)) {
+    //         expenseToAccept.RejectTicket();
+    //         return true;
+    //     } return false;
+    // }
+
+    public Expense GetExpense(int row) {
+        if(row <= 0 || row > ListOfExpenses.Count()) return null;
+        return ListOfExpenses[row-1];
     }
 
 }
