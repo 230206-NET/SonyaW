@@ -3,12 +3,6 @@ namespace UI;
 
 using Models;
 
-/*
-TO-DO:
-  - create login function (putting credentials against DB)
-  - 
-*/
-
 public class MainMenu {
     internal static TicketService _ticketService = new TicketService(new TicketDB());
     internal static EmployeeService _employeeService = new EmployeeService(new EmployeeDB());
@@ -378,7 +372,7 @@ What action would you like to take?
         if(PromptPassword() == empl.userPW) {
             // Console.Write("     New Email: ");
             // string emailRes = ValidateAndReturnEmail(Console.ReadLine());
-            Console.Write("     New name (First AND last name or else changes will not be made): ");
+            Console.Write("\n     New name (First AND last name or else changes will not be made): ");
             string nameRes = ValidateAndReturnName(Console.ReadLine());
             Console.Write("     New Password: ");
             string pwRes = PromptPassword();
@@ -567,15 +561,15 @@ What action would you like to take?
             //*/
                 case "3":
                     Console.Write("  ** You may press ENTER to move on to the next credential**\n     Current Password (For user validation) : ");
-                    if(Console.ReadLine() == manager.userPW) {
+                    if(PromptPassword() == manager.userPW) {
                         // Console.Write("     New Email: ");
                         // string emailRes = ValidateAndReturnEmail(Console.ReadLine());
-                        Console.Write("     New name (First AND last name or else changes will not be made): ");
+                        Console.Write("\n     New name (First AND last name or else changes will not be made): ");
                         string nameRes = ValidateAndReturnName(Console.ReadLine());
                         if(nameRes == "") nameRes = manager.name;
 
                         Console.Write("     New Password: ");
-                        string pwRes = Console.ReadLine();
+                        string pwRes = PromptPassword();
                         if(pwRes == "") pwRes = manager.userPW;
                         // string oldEmail = manager.email;
                         manager.EditProfile(nameRes, pwRes);

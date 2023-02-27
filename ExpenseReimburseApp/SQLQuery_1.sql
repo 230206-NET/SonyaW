@@ -1,3 +1,7 @@
+SELECT * FROM Managers;
+SELECT * FROM Employees;
+SELECT * FROM Expenses;
+
 ---------------------------- MANAGERS TABLE --------------------------------------------------------------------------->
 
 -- DROP TABLE Managers;

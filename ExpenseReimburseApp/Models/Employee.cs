@@ -61,7 +61,7 @@ public class Employee
             Console.Write("  {0}   |", i);
             ticket.ToString();
             i++;
-            Thread.Sleep(100);
+            Thread.Sleep(150);
         }
         Console.WriteLine("---------------------------------------------------");
     }
