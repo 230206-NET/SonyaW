@@ -1,63 +1,31 @@
-﻿namespace UI;
-
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
+﻿
+namespace UI;
 
 using Models;
 
 /*
 TO-DO:
   - create login function (putting credentials against DB)
-
+  - 
 */
 
 public class MainMenu {
+    internal static TicketService _ticketService = new TicketService(new TicketDB());
+    internal static EmployeeService _employeeService = new EmployeeService(new EmployeeDB());
+    internal static ManagerService _managerService = new ManagerService(new ManagerDB());
 
     public static void Main(string[] args) {
 
         MainMenu start = new MainMenu();
         start.Start();
 
-//*
-        // Console.WriteLine("Initiating testers...");
-        // List<Expense> testExpense1 = new List<Expense>() {
-        //     new Expense(100, "stuff"), new Expense(150, "things"), new Expense(200, "airfare")
-        // };
-        //  List<Expense> testExpense2 = new List<Expense>() {
-        //     new Expense(100, "stuff"), new Expense(150, "things"), new Expense(200, "airfare")
-        // };
-        //  List<Expense> testExpense3 = new List<Expense>() {
-        //     new Expense(100, "stuff"), new Expense(150, "things"), new Expense(200, "airfare")
-        // };
-        //  List<Expense> testExpense4 = new List<Expense>() {
-        //     new Expense(100, "stuff"), new Expense(150, "things"), new Expense(200, "airfare")
-        // };
-        //  List<Expense> testExpense5 = new List<Expense>() {
-        //     new Expense(100, "stuff"), new Expense(150, "things"), new Expense(200, "airfare")
-        // };
-        // Employee tester1 = new Employee("sonya wong", "qienvpiq2nv", "sona@gmail.com", "juniper song", testExpense1);
-        // Employee tester2 = new Employee("different wong", "qienvpiq2nv", "sona@gmail.com", "juniper song", testExpense2);
-        // Employee tester3 = new Employee("bob wong", "qienvpiq2nv", "sona@gmail.com", "juniper song", testExpense3);
-        // Employee tester4 = new Employee("joe wong", "qienvpiq2nv", "sona@gmail.com", "juniper song", testExpense4);
-        // Employee tester5 = new Employee("john wong", "qienvpiq2nv", "sona@gmail.com", "juniper song", testExpense5);
-
-        // List<Employee> mngEmpl = new List<Employee>() {tester1, tester2, tester3, tester4, tester5};
-        // Manager newMang = new Manager("John Doe", "helloworld", "email@email.com", mngEmpl);
-        
-        // newMang.AcceptEmployeeTicket(newMang.GetEmployee(1).GetExpense(1)); // PASS IN AN EXPENSE OBJECT
-        // newMang.RejectEmployeeTicket(newMang.GetEmployee(1).GetExpense(2)); // PASS IN AN EXPENSE OBJECT
-        // Console.WriteLine("{0}", newMang.GetEmployee(1).GetExpense(1));
-        // newMang.DisplayAllEmployees();
-        // tester.ToString();
-        // tester.displayTickets();
-//*/
-        
-        // RunManager(newMang);
-
     }
 
     private void Start() {
+        Console.WriteLine(@"
+   ***********************************
+        REIMBURSEMENT APPLICATION
+   *********************************** ");
         while(true) {
             string initRes = initPrompt().ToLower();
             switch (initRes) {
@@ -84,28 +52,97 @@ public class MainMenu {
     }
 
     private static string initPrompt(){
-        Console.WriteLine(@"
-    [1] Sign in
+        Console.WriteLine(@"    [1] Sign in
     [2] Create Account
     [X] Exit");
         string res = Console.ReadLine();
         return res;
     }
   
-    public static bool promptExit() {
+    private static bool promptExit() {
         Console.WriteLine("Are you sure you want to cancel?");
         return (Console.ReadLine().ToLower() == "yes") ? true : false;
     }
  
-    private static bool LogIn(){
-        Console.WriteLine("Signing in...\n     Enter email:");
-        return true;
+    private static int LogIn(){
+        Console.Write("Signing in...\n   Enter email: ");
+        string emailToCheck = Console.ReadLine();
+        // CHECK LOGIN CREDENTIALS FOR MANAGERS
+        if(_managerService.DoesManagerExist(emailToCheck)) {
+            // Console.WriteLine("Manager exists!");
+            Manager mngLogIn = _managerService.GetSingleManager(emailToCheck);
+            // Console.WriteLine("{0}", mngLogIn.name);
+            if(mngLogIn == null) Console.WriteLine("Null Manager");
+            else {
+                Console.Write("   Enter your password: ");
+                string password = PromptPassword();
+                if(password == mngLogIn.userPW) {
+                    Console.WriteLine("\n   Log in successful.");
+                    Thread.Sleep(500);
+                    mngLogIn.ToString();
+                    return RunManager(mngLogIn);
+                } else {
+                    Console.WriteLine("\n   Log in failed. Returning to starting menu ...");
+                    Thread.Sleep(1500);
+                }
+            }
+        }
+        // IF NOT MANAGER, CHECK LOGIN CREDENTIAL FOR EMPLOYEE
+        else if(_employeeService.DoesEmployeeExist(emailToCheck)){
+            Employee emplLogIn = _employeeService.GetSingleEmployee(emailToCheck);
+            if(emplLogIn == null) Console.WriteLine("Null Employee");
+            else {
+                Console.Write("   Enter your password: ");
+                string password = PromptPassword();
+                if(password == emplLogIn.userPW) {
+                    Console.WriteLine("\n   Log in successful.");
+                    Thread.Sleep(500);
+                    emplLogIn.managerName = _managerService.GetSingleManager(emplLogIn.manager).name;
+                    emplLogIn.ToString();
+                    return RunEmployee(emplLogIn);
+                } else {
+                    Console.WriteLine("\n   Log in failed. Returning to starting menu ...");
+                    Thread.Sleep(1500);
+                }
+            }
+        }
+        else {
+            Console.WriteLine(" !! That email has not been registered. Please create an account before attempting to log in. !! ");
+        }
+        // if not then check in manager db
+            // if so then check password then retur true if correct
+        // if neither, keep asking for email until exit
+            // you don't exit unless user presses exit even while typing in password
+        return -1;
+    }
+
+    public static string PromptPassword() {
+        StringBuilder sb = new StringBuilder();
+        while(true) {
+            var key = Console.ReadKey(true);
+            if(key.Key == ConsoleKey.Enter) {
+                return sb.ToString();
+            } else {
+                if(key.Key == ConsoleKey.Backspace){
+                    if(sb.Length > 0) {
+                        sb.Remove(sb.Length - 1, 1);
+                        continue;
+                    }
+                    Console.Write("-");
+                }
+                else {
+                    sb.Append(key.KeyChar);
+                    Console.Write("*");
+                }
+            }
+        }
+        return "";
     }
   
     private static Employee CreateAcct() {      // RETURNS TRUE IF ABLE TO CREATE AN ACCOUNT
         Console.WriteLine("\nSetting up new account...");
-        Thread.Sleep(1000);
-        Console.Write(" Press 'X' anytime to exit.\n\n  Enter your manager's first and last name: ");
+        Thread.Sleep(500);
+        Console.Write(" Press 'X' anytime to exit.\n\n  Enter your manager's email: ");
 
         // PROMPT FOR USER'S MANAGER
         string newEmpManager = "";
@@ -113,11 +150,12 @@ public class MainMenu {
             newEmpManager = Console.ReadLine();
             if(newEmpManager.ToUpper() == "X") {
                 Console.WriteLine("Exiting...");
+                Thread.Sleep(500);
                 return null;
             }
-            newEmpManager = ValidateAndReturnName(newEmpManager);
-            if(newEmpManager != "") break;
-            else Console.Write("     ** You must have a manager to create an account. **\n     Manager name: ");
+            newEmpManager = ValidateAndReturnEmail(newEmpManager);
+            if(newEmpManager != "" && _managerService.DoesManagerExist(newEmpManager)) break;
+            else Console.Write("     ** You must have a manager present in our system to create an account. **\n     Manager Email: ");
         }
 
         // RETRIEVE USER FULL NAME
@@ -127,6 +165,7 @@ public class MainMenu {
             newEmpName = Console.ReadLine();
             if(newEmpName.ToUpper() == "X") {
                 Console.WriteLine("Exiting...");
+                Thread.Sleep(500);
                 return null;
             }
             newEmpName = ValidateAndReturnName(newEmpName);
@@ -136,60 +175,54 @@ public class MainMenu {
 
         // RETRIEVE EMAIL FROM USER
         Console.Write("  Enter your email: ");
-        string email = "";
+        string newEmpEmail = "";
         while(true) {
             string tempString = Console.ReadLine();
             if(tempString.ToUpper() == "X") {
                 Console.WriteLine("Exiting...");
+                Thread.Sleep(500);
                 return null;
             }
-            email = ValidateAndReturnEmail(tempString);
-            if(email == "") Console.Write("     ** You have entered a short or invalid email. **\n     Email: ");
+            newEmpEmail = ValidateAndReturnEmail(tempString);
+            if(newEmpEmail == "") Console.Write("     ** You have entered a short or invalid email. **\n     Email: ");
             else break;
         }
 
         // RETRIEVE PASSWORD FROM USER
         Console.Write("  Enter you password: ");
-        StringBuilder tempPW = new StringBuilder();
+        string newEmpPW = "";
         while(true) {
-            var key = Console.ReadKey(true);
-            if(key.Key == ConsoleKey.Enter) {
-                if(tempPW.ToString().ToUpper() == "X") {
-                    Console.WriteLine("Exiting...");
-                    return null;
-                }
-                if(tempPW.Length > 5) {
-                    Console.WriteLine("\n");
-                    break;
-                }
-                else {
-                    Console.Write("\n     ** Your password must have a length of at least 5. **\n     Password: ");
-                    tempPW.Remove(0, tempPW.Length);
-                    continue;
-                }
-            } else {
-                if(key.Key == ConsoleKey.Backspace){
-                    if(tempPW.Length > 0) {
-                        tempPW.Remove(tempPW.Length - 1, 1);
-                        continue;
-                    }
-                    Console.Write("-");
-                }
-                else {
-                    tempPW.Append(key.KeyChar);
-                    Console.Write("*");
-                }
+            newEmpPW = PromptPassword();
+            if(newEmpPW == "X") {
+                Console.WriteLine("Exiting...");
+                Thread.Sleep(500);
+                return null;
+            }
+            if(newEmpPW.Length > 5) {
+                Console.WriteLine("\n");
+                break;
+            }
+            else {
+                Console.Write("\n     ** Your password must have a length of at least 5. **\n     Password: ");
+                continue;
             }
         }
 
         // FINALIZING CREATION OF ACCOUNT
         Console.WriteLine("Creating account...");
-        Thread.Sleep(2000); // sleeps for 2 seconds
-        Employee newEmp = new Employee(newEmpName, tempPW.ToString(), email, newEmpManager);
-        newEmp.ToString();
-        Console.Write("\n  ***** Welcome {0}! *****  \n", newEmp.name);
-
-        return newEmp;
+        Thread.Sleep(1000);
+        Employee newEmp = new Employee(newEmpName, newEmpPW, newEmpEmail, newEmpManager);
+        newEmp.managerName = _managerService.GetSingleManager(newEmpManager).name;
+        if(_employeeService.CreateEmployee(newEmp) != -1) {
+            newEmp.ToString();
+            Thread.Sleep(400);
+            Console.Write("\n    ***** Welcome {0}! *****  \n", newEmp.name);
+            return newEmp;
+        } else {
+            Console.WriteLine("Account creating was not successful due to invalid manager email. Returning to main menu...");
+            Thread.Sleep(1000);
+            return null;
+        }
     }
   
     public static string ValidateAndReturnName (string tempInputName) {
@@ -214,24 +247,28 @@ public class MainMenu {
     }
   
     private static int RunEmployee(Employee empl) {
+        Thread.Sleep(500);
         while(true) {
              Console.WriteLine(@"
-````````````````````````````````````````````````
+````````````````````````````````````````````
 What action would you like to take?
     [1]: Create reimbursement request ticket
     [2]: View all submitted tickets
     [3]: Delete a ticket
     [4]: Edit profile
+    [5]: View Profile
     [X]: Logout");
             string res = Console.ReadLine();
+            Thread.Sleep(200);
             switch (res.ToUpper()) {
                 case "1":
                     Console.WriteLine("Initializing new request ticket...");
+                    Thread.Sleep(200);
                     CreateTicket(empl);
                 break;
                 case "2":
                     empl.displayTickets();
-                    Console.WriteLine("Press any key to return to previous menu.");
+                    Console.WriteLine("Press any key to continue.  ");
                     if(Console.ReadKey() != null) continue;
                 break;
                 case "3":
@@ -240,156 +277,22 @@ What action would you like to take?
                 case "4":
                     EditProfile(empl);
                 break;
+                case "5":
+                    empl.ToString();
+                    Console.Write("\n   Press any button to return to previous menu... ");
+                    Console.ReadKey();
+                break;
                 case "X":
                     Console.WriteLine("Logging out of account...");
+                    Thread.Sleep(1000);
                     return -1;
                 break;
                 default:
                     Console.WriteLine("Please enter one of the following options.");
                 break;
             }
+            Thread.Sleep(200);
         }
-        return -1;
-    }
- 
-    public static int RunManager(Manager manager) {
-        // view list of Employees
-        Thread.Sleep(2000);
-        while(true) {
-            manager.DisplayAllEmployees();
-            Thread.Sleep(1000);
-            Console.WriteLine(@"
-   What would you like to do?
-      [1]: View an employee's information
-      [2]: Remove an employee
-      [X}: Exit
-    ");
-            string action = Console.ReadLine().ToUpper();
-            switch (action) {
-                case "1":
-                    Console.Write("     Enter the row of the employee you would like to view: ");
-                    int emplRow = 0;
-                    bool validEmplRow = int.TryParse(Console.ReadLine(), out emplRow);
-                    Console.WriteLine();
-                    if(validEmplRow) {
-                        Employee viewingEmpl = manager.GetEmployee(emplRow-1);
-                        if(viewingEmpl != null) {
-                            Console.WriteLine(@"
-       Viewing {0}'s tickets
-    ---------------------------------------", viewingEmpl.name);
-                            viewingEmpl.displayTickets();
-                            Console.WriteLine(@"
-    Actions:
-        [1]: Accept a ticket
-        [2]: Reject a ticket
-        [X]: Return to previous menu
-        ");
-                            string menu2Action = Console.ReadLine().ToUpper();
-                            switch (menu2Action) {
-                                case "1":
-                                    Console.Write("   Enter row of ticket you would like to accept: ");
-                                    int acceptTicketRow = 0;
-                                    bool acceptParseRow = int.TryParse(Console.ReadLine(), out acceptTicketRow);
-                                    if(acceptParseRow) {
-                                        if(manager.AcceptEmployeeTicket(viewingEmpl, acceptTicketRow - 1)) {
-                                            Thread.Sleep(1000);
-                                            viewingEmpl.displayTickets();
-                                            Thread.Sleep(1000);
-                                            Console.WriteLine(@"
-          *************************
-              Update successful
-          *************************
-          ");
-                                            Thread.Sleep(1000);
-                                        } else {
-                                            Console.WriteLine("     !! Update was unsuccessful due to invalid row number");
-                                            Thread.Sleep(2000);
-                                            Console.WriteLine("   Returning to main menu...");
-                                            Thread.Sleep(1500);
-                                        }
-                                    } else {
-                                        Thread.Sleep(500);
-                                        Console.WriteLine(" !! Valid row number was not inputted");
-                                        Thread.Sleep(2000);
-                                        Console.WriteLine("   Returning to main menu...");
-                                        Thread.Sleep(1500);
-                                    }
-                                break;
-                                case "2":
-                                    Console.Write("   Please enter row of ticket you would like to reject: ");
-                                    int rejectTicketRow = 0;
-                                    bool rejectParseRow = int.TryParse(Console.ReadLine(), out rejectTicketRow);
-                                    if(rejectParseRow) {
-                                        if(manager.RejectEmployeeTicket(viewingEmpl, rejectTicketRow - 1)) {
-                                            Thread.Sleep(1000);
-                                            viewingEmpl.displayTickets();
-                                            Thread.Sleep(1000);
-                                            Console.WriteLine(@"
-        ************************
-            Update successful
-        ************************
-        ");
-                                            Thread.Sleep(1000);
-                                        } else {
-                                            Console.WriteLine("   !! Update was unsuccessful due to invalid row number.");
-                                            Thread.Sleep(2000);
-                                            Console.WriteLine("   Returning to main menu...");
-                                            Thread.Sleep(1500);
-                                        }
-                                    } else {
-                                        Thread.Sleep(500);
-                                        Console.WriteLine(" !! Valid row number was not inputted");
-                                        Thread.Sleep(2000);
-                                        Console.WriteLine("   Returning to main menu...");
-                                        Thread.Sleep(1500);
-                                    }
-                                break;
-                                case "X":
-                                    Console.WriteLine("   Returning to main menu");
-                                break;
-                                default:
-                                    Console.WriteLine("!! Unrecognized response. Returning to main menu...");
-                                    Thread.Sleep(500);
-                                break;
-                            }
-                        } else {
-                            Thread.Sleep(500);
-                            Console.WriteLine("   !! Row number is out of range. Please enter a valid row number displayed on the left of the table.");
-                            Thread.Sleep(500);
-                        }
-                    } else {
-                        Thread.Sleep(500);
-                        Console.WriteLine(" !! Valid row number was not inputted");
-                        Thread.Sleep(2000);
-                        Console.WriteLine("   Returning to main menu...");
-                        Thread.Sleep(1500);
-                    }
-                break;
-                case "2":
-                    Console.Write("   Enter the row number of the employee you would like to remove: ");
-                    int removeRow = 0;
-                    bool validRemoveRow = int.TryParse(Console.ReadLine(), out removeRow);
-                    if(validRemoveRow && manager.RemoveEmployee(removeRow-1)) {
-                        Console.WriteLine(@"
-    ***********************************
-        Employee removal successful
-    ***********************************
-    ");
-                    }
-                    else {
-                        Console.WriteLine("     !! Removal was unsuccessful due to invalid row !!\n");
-                        Thread.Sleep(1500);
-                    }
-                break;
-                case "X":
-                    return -1;
-                break;
-                default:
-                    Console.WriteLine("   !! Unrecognized response. Please try again");
-                break;
-            }  
-        }
-        // accept/reject tickets
         return -1;
     }
  
@@ -407,11 +310,18 @@ What action would you like to take?
             else break;
         }
         Console.WriteLine("   Entering ticket reimbursement of ${0} for {1}...", tempReimburseVal, ticketDescription);
-        Thread.Sleep(2000);
-        empl.createTicket(tempReimburseVal, ticketDescription);
-        Console.WriteLine("   Ticket has been submitted. Awaiting response from manager.");
-        // prompt for description
-        return true;
+        Thread.Sleep(500);
+        try{
+            Expense newExpenseCreated = empl.createTicket(tempReimburseVal, ticketDescription);
+            _ticketService.CreateExpense(newExpenseCreated, empl);
+            Console.WriteLine("   Ticket has been submitted. Awaiting response from manager.");
+            Thread.Sleep(200);
+            return true;
+        } catch(Exception e) {
+            Console.WriteLine("\n  !! Unable to create ticket due to invalid user in database !! ");
+            Thread.Sleep(200);
+        }
+        return false;
     }
 
     public static bool DeleteTicket(Employee empl) {
@@ -422,73 +332,280 @@ What action would you like to take?
         Console.Write("   Which ticket do you want to delete? (Enter row number or [X] to exit): ");
         int numInput = -1;
         string stringInput = Console.ReadLine();
+        Thread.Sleep(200);
         if(stringInput.ToLower() == "x") {
             Console.WriteLine("   Cancelling. Returning to menu...\n");
+            Thread.Sleep(200);
             return false;
         }
         bool numParse = int.TryParse(stringInput, out numInput);
         if(!numParse) {
             Console.WriteLine("   Unable to identify row number. Returning to menu...\n");
+            Thread.Sleep(200);
             return false;
         } 
-        if(numInput > empl.ListOfExpenses.Count || numInput <= 0) {
+        else if(numInput > empl.ListOfExpenses.Count || numInput <= 0) {
             Console.WriteLine("   !! Value not in range. !!\n");
+            Thread.Sleep(200);
             return false;
         }
         else {
-            empl.deleteTicket(numInput);
-            Console.WriteLine("   ... Deleteion successful.\n");
-            return true;
+            int expenseToRemoveID = empl.GetExpense(numInput-1).id;
+            try{
+                empl.deleteTicket(numInput-1);
+                Thread.Sleep(200);
+                if(_ticketService.DeleteExpense(expenseToRemoveID)){
+                    Console.WriteLine(" ... Deletion successful.");
+                    Thread.Sleep(500);
+                    return true;
+                } else {
+                    Console.WriteLine("   Deletion was unsuccessful");
+                    Thread.Sleep(500);
+                    return false;
+                }
+            } catch(Exception e) {
+                Thread.Sleep(200);
+                Console.WriteLine(" !! Unable to proceed !!");
+                Thread.Sleep(200);
+            }
         }
         return false;
     }
 
     public static void EditProfile(Employee empl) {
-        Console.Write(@"
-     What would you like to edit?
-        [1]: Name
-        [2]: Password
-        [3]: Email
-     Option: ");
-        int userInput = 0;
-        bool res = int.TryParse(Console.ReadLine(), out userInput);
-        if(res) {
-            switch(userInput) {
-                case 1:
-                    Console.Write("      New name: ");
-                    string tempName = ValidateAndReturnName(Console.ReadLine());
-                    while(true) {
-                        if(tempName != "") {
-                            empl.name = tempName;
-                            Console.WriteLine("   Successfully changed name.");
-                            break;
-                        } else Console.WriteLine("   Invalid name. You must input a first AND last name.");
-                    }
-                break;
-                case 2:
-                    Console.Write("      Current Password: ");
-                    if(Console.ReadLine() == empl.userPW){
-                        Console.Write("\n      New Password: ");
-                        empl.userPW = Console.ReadLine();
-                        Console.WriteLine("\n");
-                    } else Console.WriteLine("   Password does not match! Returning to previous prompt...");
-                break;
-                case 3:
-                    Console.Write("      New email: ");
-                    while(true) {
-                        string tempEmail = ValidateAndReturnEmail(Console.ReadLine());
-                        if(tempEmail == "") Console.Write("   Please enter a valid email that includes \"@\" and its' domain.\n      ");
-                        else {
-                            empl.email = tempEmail;
-                            Console.WriteLine("   Successfully changed email.");
-                            break;
+        Thread.Sleep(200);
+        Console.Write("  ** You may press ENTER to move on to the next credential**\n     Current Password (For user validation) : ");
+        if(Console.ReadLine() == empl.userPW) {
+            // Console.Write("     New Email: ");
+            // string emailRes = ValidateAndReturnEmail(Console.ReadLine());
+            Console.Write("     New name (First AND last name or else changes will not be made): ");
+            string nameRes = ValidateAndReturnName(Console.ReadLine());
+            Console.Write("     New Password: ");
+            string pwRes = Console.ReadLine();
+            empl.EditProfile(nameRes == "" ? empl.name : nameRes, pwRes);
+            _employeeService.EditProfile(empl);
+            Thread.Sleep(200);
+            Console.WriteLine("\n   Updates have been made!");
+        }
+        else{
+            Thread.Sleep(200);
+            Console.WriteLine("   Your password does not match and unable to make changes. Exiting...");
+        }
+
+    }
+    
+    public static int RunManager(Manager manager) {
+        while(true) {
+            manager.EmployeesToManage = _employeeService.GetAssociatedEmployees(manager.email);
+            foreach(Employee empl in manager.EmployeesToManage) {
+                List<Expense> emplExpenses = _ticketService.GetExpenseForEmpl(empl.email);                
+                empl.ListOfExpenses = emplExpenses;
+            }
+            manager.DisplayAllEmployees();
+            Thread.Sleep(500);
+            Console.Write(@"
+   What would you like to do?
+      [1]: View an employee's information
+      [2]: Remove an employee
+      [3]: Edit Profile
+      [4]: View Profile
+      [X}: Log out
+    "); //      [3]: Promote employee to manager (Work in progress ...)
+        //      [4]: Demote a manger (Work in progress ...)
+            string action = Console.ReadLine().ToUpper();
+            switch (action) {
+                case "1":
+                    Console.Write("     Enter the row of the employee you would like to view: ");
+                    int emplRow = 0;
+                    bool validEmplRow = int.TryParse(Console.ReadLine(), out emplRow);
+                    Console.WriteLine();
+                    Thread.Sleep(200);
+                    if(validEmplRow) {
+                        Employee viewingEmpl = manager.GetEmployee(emplRow-1);
+                        if(viewingEmpl != null) {
+                            viewingEmpl.ListOfExpenses = _ticketService.GetExpenseForEmpl(viewingEmpl.email);
+                            Console.WriteLine(@"
+       Viewing {0}'s tickets
+    ---------------------------------------", viewingEmpl.name);
+                            Thread.Sleep(200);
+                            viewingEmpl.displayTickets();
+                            bool viewingEmplTickets = true;
+                            while(viewingEmplTickets) {
+                                Thread.Sleep(200);
+                                Console.WriteLine(@"
+    Actions:
+        [1]: Accept a ticket
+        [2]: Reject a ticket
+        [X]: Return to previous menu
+            ");
+                                string menu2Action = Console.ReadLine().ToUpper();
+                                switch (menu2Action) {
+                                    case "1":
+                                        Console.Write("   Enter row of ticket you would like to accept: ");
+                                        int acceptTicketRow = 0;
+                                        bool acceptParseRow = int.TryParse(Console.ReadLine(), out acceptTicketRow);
+                                        Thread.Sleep(200);
+                                        if(acceptParseRow) {
+
+                                            if(manager.AcceptEmployeeTicket(viewingEmpl, acceptTicketRow - 1) && _ticketService.AcceptTicket(viewingEmpl.GetExpense(acceptTicketRow-1).id)) {
+                                                // manager.EmployeesToManage[emplRow - 1].ListOfExpenses[acceptTicketRow - 1].ticketStatus = 1;
+                                                viewingEmpl.displayTickets();
+                                                Thread.Sleep(200);
+                                                Console.WriteLine(@"
+        ***********************
+            Ticket Accepted
+        ***********************");
+                                            } else {
+                                                Console.WriteLine(" !! Update was unsuccessful due to invalid row number");
+                                                Thread.Sleep(200);
+                                                Console.WriteLine("   Returning to main menu...");
+                                            }
+                                        } else {
+                                            Console.WriteLine(" !! Not a valid row number !!");
+                                            Thread.Sleep(200);
+                                            Console.WriteLine("   Returning to main menu...");
+                                        }
+                                    break;
+                                    case "2":
+                                        Console.Write("   Please enter row of ticket you would like to reject: ");
+                                        int rejectTicketRow = 0;
+                                        bool rejectParseRow = int.TryParse(Console.ReadLine(), out rejectTicketRow);
+                                        Thread.Sleep(200);
+                                        if(rejectParseRow) {
+                                            if(manager.RejectEmployeeTicket(viewingEmpl, rejectTicketRow - 1) && _ticketService.RejectTicket(viewingEmpl.GetExpense(rejectTicketRow - 1).id)) {
+                                                viewingEmpl.displayTickets();
+                                                Thread.Sleep(200);
+                                                Console.WriteLine(@"
+        ***********************
+            Ticket Rejected
+        ***********************");
+                                            } else {
+                                                Console.WriteLine(" !! Update was unsuccessful due to invalid row number.");
+                                                Thread.Sleep(200);
+                                                Console.WriteLine("   Returning to main menu...");
+                                            }
+                                        } else {
+                                            Console.WriteLine(" !! Not a valid row number !!");
+                                            Thread.Sleep(200);
+                                            Console.WriteLine("   Returning to main menu...");
+                                    }
+                                    break;
+                                    case "X":
+                                        Console.WriteLine("   Returning to main menu");
+                                        viewingEmplTickets = false;
+                                    break;
+                                    default:
+                                        Console.WriteLine(" !! Unrecognized response");
+                                    break;
+                                }
+                            }
+                            
+                        } else {
+                            Console.WriteLine("   !! Row number is out of range. Please enter a valid row number displayed on the left of the table !! ");
                         }
+                    } else {
+                        Console.WriteLine(" !! Valid row number was not inputted !! ");
+                        Thread.Sleep(200);
+                        Console.WriteLine("   Returning to main menu...");
                     }
+                break;
+                case "2":
+                    Console.Write("   Enter the row number of the employee you would like to remove: ");
+                    int removeRow = 0;
+                    bool validRemoveRow = int.TryParse(Console.ReadLine(), out removeRow);
+                    Thread.Sleep(200);
+                    if(validRemoveRow && _employeeService.DeleteEmployee(manager.GetEmployee(removeRow-1)) && manager.RemoveEmployee(removeRow-1)) {
+                        Console.WriteLine(@"
+    ***********************************
+        Employee removal successful
+    ***********************************
+    ");
+                    }
+                    else {
+                        Console.WriteLine("     !! Removal was unsuccessful due to invalid row !!\n");
+                    }
+                break;
+    /*            case "3":
+                    Console.Write("   Which row employee would you like to promote: ");
+                    int rowNum = 0;
+                    bool isRow = int.TryParse(Console.ReadLine(), out rowNum);
+                    if(isRow && rowNum > 0 && rowNum <= manager.EmployeesToManage.Count) {
+                        Manager promotedEmployee = _managerService.PromoteEmployee(manager.GetEmployee(rowNum-1));
+                        manager.EmployeesToManage.RemoveAt(rowNum-1);
+                        Console.WriteLine(@"
+    ***********************************
+       Employee promotion successful
+    ***********************************
+                        ");
+                    }
+                    else Console.WriteLine("   Invalid row number. Unable to promote an employee.");
+                break;
+    //*/
+
+    /*            case "4":
+                    List<Manager> allManagers = _managerService.GetAllManagers();
+                    Console.WriteLine("         Managers\n   -----------------------");
+                    int i = 1;
+                    foreach(Manager mng in allManagers) {
+                        Console.WriteLine($"  {i, 3} |  {mng.name}");
+                        i++;
+                    }
+                    Console.Write("   Which row manager would you like to demote: ");
+                    int rowNum = 0;
+                    bool isRow = int.TryParse(Console.ReadLine(), out rowNum);
+                    if(isRow && rowNum > 0 && rowNum <= allManagers.Count) {
+                        Manager deleteMng = allManagers[rowNum - 1];
+                        Employee demotedEmployee = _managerService.DemoteManager(deleteMng, manager.email);
+                        if(demotedEmployee != null) {
+                            Console.WriteLine("Employee demoted");
+                            manager.EmployeesToManage.Add(_managerService.DemoteManager(deleteMng, manager.email));
+                        }
+                        
+                        
+                    }
+                break; 
+            //*/
+                case "3":
+                    Console.Write("  ** You may press ENTER to move on to the next credential**\n     Current Password (For user validation) : ");
+                    if(Console.ReadLine() == manager.userPW) {
+                        // Console.Write("     New Email: ");
+                        // string emailRes = ValidateAndReturnEmail(Console.ReadLine());
+                        Console.Write("     New name (First AND last name or else changes will not be made): ");
+                        string nameRes = ValidateAndReturnName(Console.ReadLine());
+                        if(nameRes == "") nameRes = manager.name;
+
+                        Console.Write("     New Password: ");
+                        string pwRes = Console.ReadLine();
+                        if(pwRes == "") pwRes = manager.userPW;
+                        // string oldEmail = manager.email;
+                        manager.EditProfile(nameRes, pwRes);
+                        _managerService.EditProfile(manager);
+                        Thread.Sleep(200);
+                        Console.WriteLine("\n   Updates have been made!");
+                    }
+                    else{
+                        Thread.Sleep(200);
+                        Console.WriteLine("   Your password does not match and unable to make changes. Exiting...");
+                    }
+                break;
+                case "4":
+                    manager.ToString();
+                    Console.Write("\n   Press any button to return to previous menu...  ");
+                    Console.ReadKey();
+                break;
+                case "X":
+                    Thread.Sleep(200);
+                    Console.WriteLine("  Logging out ...");
+                    Thread.Sleep(1000);
+                    return -1;
                 break;
                 default:
-                    Console.WriteLine("Input unrecognized. Returning to previous prompt...");
+                    Thread.Sleep(200);
+                    Console.WriteLine("   !! Unrecognized response. Please try again !! ");
                 break;
             }
+            Thread.Sleep(500);
         }
+        return -1;
     }
 }

@@ -8,10 +8,14 @@ public class Employee
     public string userPW { get; set; } = "No security";
     public string email { get; set; } = "Unknown";
     public string manager { get; set; } = "Unknown";
-    // public bool promote { get; set; } = false;
+    public string managerName { get; set; } = "";
     public List<Expense> ? ListOfExpenses = new List<Expense>();
 
     public Employee(){}
+
+    public Employee(string nameIn) {
+        name = nameIn;
+    }
 
     public Employee(string nameIn, string userPwIn, string emailIn, string managerIn) {
         name = nameIn;
@@ -28,11 +32,13 @@ public class Employee
         this.ListOfExpenses = ListOfExpenses;
     }
 
-    public void createTicket(int value, string description) {
-        // Console.WriteLine("Inside createTicket");
-        Expense newExpense = new Expense(value, description);
-        // Console.WriteLine("Created instance of Expense");
-        ListOfExpenses.Add(newExpense);
+    public Employee(string nameIn, string userPwIn, string emailIn, string managerIn, string managerNameIn, List<Expense> ListOfExpenses) {
+        name = nameIn;
+        userPW = userPwIn;
+        email = emailIn;
+        manager = managerIn;
+        managerName = managerNameIn;
+        this.ListOfExpenses = ListOfExpenses;
     }
 
     public void ToString() {
@@ -43,12 +49,12 @@ public class Employee
        Name:    {0}
        Email:   {1}
        Manager: {2}",
-    this.name, this.email, this.manager);
+    this.name, this.email, this.managerName);
     }
 
     public void displayTickets() {
         Console.WriteLine(@"
- Row  |  Price |   Ticket Status  | Description
+ Row  |  Price |  Ticket Status | Description
 ---------------------------------------------------");
         int i = 1;
         foreach(Expense ticket in ListOfExpenses) {
@@ -57,10 +63,17 @@ public class Employee
             i++;
             Thread.Sleep(100);
         }
+        Console.WriteLine("---------------------------------------------------");
+    }
+
+    public Expense createTicket(int value, string description) {
+        Expense newExpense = new Expense(value, description);
+        ListOfExpenses.Add(newExpense);
+        return newExpense;
     }
 
     public void deleteTicket(int input) {
-        ListOfExpenses.RemoveAt(input - 1);
+        ListOfExpenses.RemoveAt(input);
     }
 
     // public bool AcceptTicket(Expense expenseToAccept) {
@@ -78,8 +91,13 @@ public class Employee
     // }
 
     public Expense GetExpense(int row) {
-        if(row <= 0 || row > ListOfExpenses.Count()) return null;
-        return ListOfExpenses[row-1];
+        if(row < 0 || row >= ListOfExpenses.Count()) return null;
+        return ListOfExpenses[row];
+    }
+
+    public void EditProfile(string newName, string newPW) {
+        name = newName;
+        if(newPW != "") userPW = newPW;
     }
 
 }
