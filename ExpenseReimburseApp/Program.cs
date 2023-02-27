@@ -375,13 +375,13 @@ What action would you like to take?
     public static void EditProfile(Employee empl) {
         Thread.Sleep(200);
         Console.Write("  ** You may press ENTER to move on to the next credential**\n     Current Password (For user validation) : ");
-        if(Console.ReadLine() == empl.userPW) {
+        if(PromptPassword() == empl.userPW) {
             // Console.Write("     New Email: ");
             // string emailRes = ValidateAndReturnEmail(Console.ReadLine());
             Console.Write("     New name (First AND last name or else changes will not be made): ");
             string nameRes = ValidateAndReturnName(Console.ReadLine());
             Console.Write("     New Password: ");
-            string pwRes = Console.ReadLine();
+            string pwRes = PromptPassword();
             empl.EditProfile(nameRes == "" ? empl.name : nameRes, pwRes);
             _employeeService.EditProfile(empl);
             Thread.Sleep(200);
@@ -389,7 +389,7 @@ What action would you like to take?
         }
         else{
             Thread.Sleep(200);
-            Console.WriteLine("   Your password does not match and unable to make changes. Exiting...");
+            Console.WriteLine("\n   Your password does not match and unable to make changes. Exiting...");
         }
 
     }
