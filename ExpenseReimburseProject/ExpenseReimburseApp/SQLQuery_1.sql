@@ -1,6 +1,6 @@
 SELECT * FROM Managers;
 SELECT * FROM Employees;
-SELECT * FROM Expenses;
+SELECT * FROM Expenses ORDER BY EmplEmail;
 
 SELECT * FROM Expenses WHERE EmplEmail = (SELECT * FROM Employees WHERE MngEmail = 'manager2@gmail.com')
 
@@ -11,7 +11,7 @@ SELECT * FROM Expenses WHERE EmplEmail = (SELECT * FROM Employees WHERE MngEmail
 CREATE TABLE Managers (
     Email VARCHAR(64) PRIMARY KEY,
     managerName VARCHAR(64),
-    managerPW VARCHAR(64)
+    managerPW NVARCHAR(64)
 );
 
 INSERT INTO Managers (Email, managerName, managerPW) VALUES ('manager1@gmail.com', 'Barry Bear', 'barrybear');
@@ -27,7 +27,7 @@ TRUNCATE TABLE Managers
 CREATE TABLE Employees(
     EmplEmail VARCHAR(64) PRIMARY KEY NOT NULL,
     EmplName VARCHAR(64),
-    EmplPW VARCHAR(64) NOT NULL,
+    EmplPW NVARCHAR(64) NOT NULL,
     MngEmail VARCHAR(64) REFERENCES Managers(Email)
 );
 
