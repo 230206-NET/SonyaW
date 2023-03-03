@@ -2453,7 +2453,9 @@
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
           "Models": "1.0.0",
-          "System.Data.SqlClient": "4.8.5"
+          "System.Data.SqlClient": "4.8.5",
+          "serilog": "2.12.0",
+          "serilog.sinks.file": "5.0.0"
         },
         "compile": {
           "bin/placeholder/DataAccess.dll": {}
@@ -7635,11 +7637,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\UnitTesting\\UnitTesting.csproj",
+      "projectUniqueName": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\UnitTesting\\UnitTesting.csproj",
       "projectName": "UnitTesting",
-      "projectPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\UnitTesting\\UnitTesting.csproj",
+      "projectPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\UnitTesting\\UnitTesting.csproj",
       "packagesPath": "C:\\Users\\Sonya\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\UnitTesting\\obj\\",
+      "outputPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\UnitTesting\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Sonya\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -7654,11 +7656,11 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\ExpenseReimburseApp\\ExpenseReimburseApp.csproj": {
-              "projectPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\ExpenseReimburseApp\\ExpenseReimburseApp.csproj"
+            "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\ExpenseReimburseApp\\ExpenseReimburseApp.csproj": {
+              "projectPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\ExpenseReimburseApp\\ExpenseReimburseApp.csproj"
             },
-            "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\Models\\Models.csproj": {
-              "projectPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\Models\\Models.csproj"
+            "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\Models\\Models.csproj": {
+              "projectPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\Models\\Models.csproj"
             }
           }
         }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\UnitTesting\\UnitTesting.csproj": {}
+    "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\UnitTesting\\UnitTesting.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\DataAccess\\DataAccess.csproj": {
+    "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\DataAccess\\DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\DataAccess\\DataAccess.csproj",
+        "projectUniqueName": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\DataAccess\\DataAccess.csproj",
         "projectName": "DataAccess",
-        "projectPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\DataAccess\\DataAccess.csproj",
+        "projectPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\DataAccess\\DataAccess.csproj",
         "packagesPath": "C:\\Users\\Sonya\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\DataAccess\\obj\\",
+        "outputPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Sonya\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -26,8 +26,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\Models\\Models.csproj": {
-                "projectPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\Models\\Models.csproj"
+              "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\Models\\Models.csproj": {
+                "projectPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\Models\\Models.csproj"
               }
             }
           }
@@ -45,6 +45,14 @@
             "System.Data.SqlClient": {
               "target": "Package",
               "version": "[4.8.5, )"
+            },
+            "serilog": {
+              "target": "Package",
+              "version": "[2.12.0, )"
+            },
+            "serilog.sinks.file": {
+              "target": "Package",
+              "version": "[5.0.0, )"
             }
           },
           "imports": [
@@ -67,14 +75,14 @@
         }
       }
     },
-    "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\ExpenseReimburseApp\\ExpenseReimburseApp.csproj": {
+    "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\ExpenseReimburseApp\\ExpenseReimburseApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\ExpenseReimburseApp\\ExpenseReimburseApp.csproj",
+        "projectUniqueName": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\ExpenseReimburseApp\\ExpenseReimburseApp.csproj",
         "projectName": "ExpenseReimburseApp",
-        "projectPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\ExpenseReimburseApp\\ExpenseReimburseApp.csproj",
+        "projectPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\ExpenseReimburseApp\\ExpenseReimburseApp.csproj",
         "packagesPath": "C:\\Users\\Sonya\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\ExpenseReimburseApp\\obj\\",
+        "outputPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\ExpenseReimburseApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Sonya\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -89,14 +97,14 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\DataAccess\\DataAccess.csproj": {
-                "projectPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\DataAccess\\DataAccess.csproj"
+              "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\DataAccess\\DataAccess.csproj": {
+                "projectPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\DataAccess\\DataAccess.csproj"
               },
-              "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\Models\\Models.csproj": {
-                "projectPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\Models\\Models.csproj"
+              "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\Models\\Models.csproj": {
+                "projectPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\Models\\Models.csproj"
               },
-              "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\Services\\Services.csproj": {
-                "projectPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\Services\\Services.csproj"
+              "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\Services\\Services.csproj": {
+                "projectPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\Services\\Services.csproj"
               }
             }
           }
@@ -166,14 +174,14 @@
         }
       }
     },
-    "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\Models\\Models.csproj": {
+    "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\Models\\Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\Models\\Models.csproj",
+        "projectUniqueName": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\Models\\Models.csproj",
         "projectName": "Models",
-        "projectPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\Models\\Models.csproj",
+        "projectPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\Models\\Models.csproj",
         "packagesPath": "C:\\Users\\Sonya\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\Models\\obj\\",
+        "outputPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\Models\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Sonya\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -219,14 +227,14 @@
         }
       }
     },
-    "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\Services\\Services.csproj": {
+    "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\Services\\Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\Services\\Services.csproj",
+        "projectUniqueName": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\Services\\Services.csproj",
         "projectName": "Services",
-        "projectPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\Services\\Services.csproj",
+        "projectPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\Services\\Services.csproj",
         "packagesPath": "C:\\Users\\Sonya\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\Services\\obj\\",
+        "outputPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\Services\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Sonya\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -241,11 +249,11 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\DataAccess\\DataAccess.csproj": {
-                "projectPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\DataAccess\\DataAccess.csproj"
+              "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\DataAccess\\DataAccess.csproj": {
+                "projectPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\DataAccess\\DataAccess.csproj"
               },
-              "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\Models\\Models.csproj": {
-                "projectPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\Models\\Models.csproj"
+              "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\Models\\Models.csproj": {
+                "projectPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\Models\\Models.csproj"
               }
             }
           }
@@ -279,14 +287,14 @@
         }
       }
     },
-    "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\UnitTesting\\UnitTesting.csproj": {
+    "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\UnitTesting\\UnitTesting.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\UnitTesting\\UnitTesting.csproj",
+        "projectUniqueName": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\UnitTesting\\UnitTesting.csproj",
         "projectName": "UnitTesting",
-        "projectPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\UnitTesting\\UnitTesting.csproj",
+        "projectPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\UnitTesting\\UnitTesting.csproj",
         "packagesPath": "C:\\Users\\Sonya\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\UnitTesting\\obj\\",
+        "outputPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\UnitTesting\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Sonya\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -301,11 +309,11 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\ExpenseReimburseApp\\ExpenseReimburseApp.csproj": {
-                "projectPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\ExpenseReimburseApp\\ExpenseReimburseApp.csproj"
+              "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\ExpenseReimburseApp\\ExpenseReimburseApp.csproj": {
+                "projectPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\ExpenseReimburseApp\\ExpenseReimburseApp.csproj"
               },
-              "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\Models\\Models.csproj": {
-                "projectPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpReimburseCSPROJS\\Models\\Models.csproj"
+              "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\Models\\Models.csproj": {
+                "projectPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Exercises\\ExpenseReimburseProject\\Models\\Models.csproj"
               }
             }
           }

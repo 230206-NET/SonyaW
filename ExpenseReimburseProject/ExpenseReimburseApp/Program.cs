@@ -10,35 +10,33 @@ public class MainMenu {
     internal static TicketService _ticketService = new TicketService(new TicketDB());
     internal static EmployeeService _employeeService = new EmployeeService(new EmployeeDB());
     internal static ManagerService _managerService = new ManagerService(new ManagerDB());
+    
     private static HttpClient client = new HttpClient();
+
     public static void Main(string[] args) {
         client.BaseAddress = new Uri("http://localhost:5268/");
 
-        List<Expense> expenseList = _ticketService.ManagersPendingTickets("manager2@gmail.com");
-        foreach(Expense ticket in expenseList) {
-            Console.WriteLine(ticket.id);
-        }
         // Main();
 
         using var logger = new LoggerConfiguration()
             .WriteTo.File("log.txt")
             .CreateLogger();
-    // can use:
-    //  - logger.Information
-    //  - logger.Warning
-    //  - logger.Fatal
+        // can use:
+        //  - logger.Information
+        //  - logger.Warning
+        //  - logger.Fatal
 
         // JsonContect content = JsonContent.Create<Type>();
         // await _http.Postasync("url", jsoncontent);
 
-        // try{
-        //     MainMenu start = new MainMenu();
-        //     logger.Information("Application starting ...");
-        //     Start();
-        //     logger.Information("... Application terminated");
-        // } catch (Exception e) {
-        //     logger.Fatal(" !! Applictaion has been terminated due to:\n {0}\n", e);
-        // }
+        try{
+            MainMenu start = new MainMenu();
+            logger.Information("Application starting ...");
+            Start();
+            logger.Information("... Application terminated");
+        } catch (Exception e) {
+            logger.Fatal(" !! Applictaion has been terminated due to:\n {0}\n", e);
+        }
     }
 
     public static async Task Main(){
@@ -278,7 +276,7 @@ public class MainMenu {
         Thread.Sleep(1000);
         Employee newEmp = new Employee(newEmpName, newEmpPW, newEmpEmail, newEmpManager);
         newEmp.managerName = _managerService.GetSingleManager(newEmpManager).name;
-        if(_employeeService.CreateEmployee(newEmp) != -1) {
+        if(_employeeService.CreateEmployee(newEmp) != null) {
             newEmp.ToString();
             logger.Information("   Account creation successful: Name: {0}, Email: {1}, Password: {2}, Manager: {3}", newEmpName, newEmpEmail, newEmpPW, newEmpManager);
             Thread.Sleep(400);
