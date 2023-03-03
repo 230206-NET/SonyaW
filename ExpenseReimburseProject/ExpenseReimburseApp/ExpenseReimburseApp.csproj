@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+
+  <ItemGroup>
+
+    <PackageReference Include="microsoft.data.sqlclient" Version="5.1.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+
+    <PackageReference Include="serilog" Version="2.12.0" />
+    <PackageReference Include="serilog.sinks.console" Version="4.1.0" />
+    <PackageReference Include="serilog.sinks.file" Version="5.0.0" />
+
+    <PackageReference Include="xunit" Version="2.4.2" />
+    <PackageReference Include="Xunit.runner.visualstudio" Version="2.4.5">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+
+  </ItemGroup>
+
+
+  <ItemGroup>
+
+    <ProjectReference Include="..\Services\Services.csproj" />
+    <ProjectReference Include="..\Models\Models.csproj" />
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
+
+  </ItemGroup>
+
+  <PropertyGroup>
+
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    
+    <!-- Prevents other programs from creating more entry point for this project which occurs a lot with xUnit-->
+    <GenerateProgramFile>false</GenerateProgramFile> 
+
+    <!-- <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateTargetFrameworkAttribute>true</GenerateTargetFrameworkAttribute> -->
+  
+  </PropertyGroup>
+
+</Project>
