@@ -13,7 +13,7 @@ public class MainMenu {
     
     private static HttpClient client = new HttpClient();
 
-    public static void Main(string[] args) {
+    public static async void Main(string[] args) {
         client.BaseAddress = new Uri("http://localhost:5268/");
 
         // Main();
@@ -65,21 +65,21 @@ public class MainMenu {
                 break;
                 case "2":
                     logger.Information("Creating account...");
-                    // try {
-                    //     // using HttpResponseMessage res = await client.GetAsync("http://localhost:5268/empl");
-                    //     // res.EnsureSuccessStatusCode();
-                    //     // string responseBody = await res.Content.ReadAsStringAsync();
-                    //     // Console.WriteLine(responseBody);
+                    try {
+                        // using HttpResponseMessage res = await client.GetAsync("http://localhost:5268/empl");
+                        // res.EnsureSuccessStatusCode();
+                        // string responseBody = await res.Content.ReadAsStringAsync();
+                        // Console.WriteLine(responseBody);
 
-                    //     string res = await client.GetStringAsync("empl");
-                    //     Console.WriteLine(res);
-                    //     // List<Employee> empls = JsonSerializer.Deserialize<List<Employee>>(responseBody);
-                    //     // foreach(Employee empl in empls) {
-                    //     //     Console.WriteLine(empl.name);
-                    //     // }
-                    // } catch (Exception e) {
-                    //     Console.WriteLine("Unable to process HttpClient");
-                    // }
+                        string res = await client.GetStringAsync("empl");
+                        Console.WriteLine(res);
+                        // List<Employee> empls = JsonSerializer.Deserialize<List<Employee>>(responseBody);
+                        // foreach(Employee empl in empls) {
+                        //     Console.WriteLine(empl.name);
+                        // }
+                    } catch (Exception e) {
+                        Console.WriteLine("Unable to process HttpClient");
+                    }
 
                     Employee newEmployee = CreateAcct();
                     if(newEmployee != null) {
