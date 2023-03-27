@@ -27,7 +27,7 @@ jobs:
       - name : Multiline script
         run : |
           echo Hello, World!
-          echo I\'m a multiline script
+          echo I'm a multiline script
           ls
           pwd
   sonar-analysis:
@@ -71,7 +71,7 @@ jobs:
        env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        WORKING_DIRECTORY: ExpenseReimburseProject/API
+        WORKING_DIRECTORY: ExpenseReimburseProject\API
        shell: powershell
        run: |
         .\.sonar\scanner\dotnet-sonarscanner begin /k:"230206-SonyaW" /o:"230206-NET" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/coverage.opencover.xml" -d:sonar.cs.vstest.reportsPaths="**/TestResults/*.trx"
