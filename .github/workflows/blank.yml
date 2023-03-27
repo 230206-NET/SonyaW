@@ -64,10 +64,10 @@ jobs:
        run: |
          New-Item -Path .\.sonar\scanner -ItemType Directory
          dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
-     # - name: Test
-     #  env:
-     #    WORKING_DIR: 04_Web\WorkoutTracker\Tests
-     #  run: dotnet test ${{env.WORKING_DIR}} --collect:"XPlat Code Coverage" --logger trx -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
+     - name: Test
+       env:
+        WORKING_DIR: ExpenseReimburseProject\UnitTesting
+       run: dotnet test ${{env.WORKING_DIR}} --collect:"XPlat Code Coverage" --logger trx -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
      - name: Build and analyze
        env:
         # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
