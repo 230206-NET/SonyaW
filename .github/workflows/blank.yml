@@ -70,11 +70,11 @@ jobs:
      #  run: dotnet test ${{env.WORKING_DIR}} --collect:"XPlat Code Coverage" --logger trx -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
      - name: Build and analyze
        env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+        # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         WORKING_DIRECTORY: ExpenseReimburseProject\API
        shell: powershell
        run: |
         .\.sonar\scanner\dotnet-sonarscanner begin /k:"230206-NET_SonyaW" /o:"230206-net" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/coverage.opencover.xml" -d:sonar.cs.vstest.reportsPaths="**/TestResults/*.trx"
-        dotnet build --no-restore ${{env.WORKING_DIRECTORY}}
+        dotnet build ${{env.WORKING_DIRECTORY}}
         .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
