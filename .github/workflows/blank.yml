@@ -27,7 +27,7 @@ jobs:
       - name : Multiline script
         run : |
           echo Hello, World!
-          echo I'm a multiline script
+          echo "I\'m a multiline script"
           ls
           pwd
   sonar-analysis:
