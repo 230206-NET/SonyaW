@@ -1,0 +1,42 @@
+<!-- npm i bootstrap@5.3.0-al -->
+
+<button class="toggle" (click)="toggleView()">Toggle View</button>
+
+<div class="flashcards-component">
+    <ng-container *ngIf="!toggleCards; else cardView">
+        <div>
+            <table class="table">
+                <tr>
+                    <th>Question</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                <ng-container *ngFor="let fc of cards">
+                    <tr>
+                        <td>{{fc.question}}</td>
+                        <td><button>Edit</button></td>
+                        <td><button>Delete</button></td>
+                    </tr>
+                </ng-container>
+            </table>
+        </div>
+    </ng-container>
+    
+    <ng-template #cardView>
+        <div class="cardView">
+            <ng-container *ngFor="let fc of cards" #cardView>
+                
+                <div class="card clickable" (click)="toggleCardAnswer(fc)">
+                    <ng-container *ngIf="!fc.viewAnswer; else showAnswer">
+                        <p>{{fc.question}}</p>
+                    </ng-container>
+                    <ng-template #showAnswer>
+                        <p>{{fc.answer}}</p>
+                    </ng-template>
+                </div>
+                
+                
+            </ng-container>
+        </div>
+    </ng-template>
+</div>

@@ -1,0 +1,15 @@
+/Users/qweenii/Revature/SonyaW/CodingChallenges/bin/Debug/net7.0/CodingChallenges
+/Users/qweenii/Revature/SonyaW/CodingChallenges/bin/Debug/net7.0/CodingChallenges.deps.json
+/Users/qweenii/Revature/SonyaW/CodingChallenges/bin/Debug/net7.0/CodingChallenges.runtimeconfig.json
+/Users/qweenii/Revature/SonyaW/CodingChallenges/bin/Debug/net7.0/CodingChallenges.dll
+/Users/qweenii/Revature/SonyaW/CodingChallenges/bin/Debug/net7.0/CodingChallenges.pdb
+/Users/qweenii/Revature/SonyaW/CodingChallenges/obj/Debug/net7.0/CodingChallenges.csproj.AssemblyReference.cache
+/Users/qweenii/Revature/SonyaW/CodingChallenges/obj/Debug/net7.0/CodingChallenges.GeneratedMSBuildEditorConfig.editorconfig
+/Users/qweenii/Revature/SonyaW/CodingChallenges/obj/Debug/net7.0/CodingChallenges.AssemblyInfoInputs.cache
+/Users/qweenii/Revature/SonyaW/CodingChallenges/obj/Debug/net7.0/CodingChallenges.AssemblyInfo.cs
+/Users/qweenii/Revature/SonyaW/CodingChallenges/obj/Debug/net7.0/CodingChallenges.csproj.CoreCompileInputs.cache
+/Users/qweenii/Revature/SonyaW/CodingChallenges/obj/Debug/net7.0/CodingChallenges.dll
+/Users/qweenii/Revature/SonyaW/CodingChallenges/obj/Debug/net7.0/refint/CodingChallenges.dll
+/Users/qweenii/Revature/SonyaW/CodingChallenges/obj/Debug/net7.0/CodingChallenges.pdb
+/Users/qweenii/Revature/SonyaW/CodingChallenges/obj/Debug/net7.0/CodingChallenges.genruntimeconfig.cache
+/Users/qweenii/Revature/SonyaW/CodingChallenges/obj/Debug/net7.0/ref/CodingChallenges.dll
